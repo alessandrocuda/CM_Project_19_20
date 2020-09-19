@@ -1,6 +1,6 @@
 import sys
 from os import path
-sys.path.insert(0, "../ISANet/")
+sys.path.insert(0, "./ISANet/")
 sys.path.insert(0, "./")
 
 from isanet.model import Mlp
@@ -8,6 +8,7 @@ from isanet.optimizer import SGD, NCG, LBFGS
 from isanet.datasets.monk import load_monk
 from isanet.utils.model_utils import printMSE, printAcc, plotHistory
 import numpy as np
+import matplotlib.pyplot as plt
 
 #np.random.seed(seed=777)
 def get_fitted_model(X_train, Y_train, optimizer, n_seed = 189, verbose = 1):
@@ -87,8 +88,6 @@ h_lbfgs = model.history
 ##############################
 # plot
 ##############################
-
-import matplotlib.pyplot as plt
 
 pos_train = (0,0)
 figsize = (12, 4)
