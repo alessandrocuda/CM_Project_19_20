@@ -66,7 +66,7 @@ results.append(h_hs["loss_mse"][-1])
 #          L-BFGS
 #############################
 m=3
-optimizer = LBFGS(m=m, c1= 1e-4, c2=0.9, ln_maxiter = ln_maxiter, tol=1e-14, debug = True)
+optimizer = LBFGS(m=m, c1= 1e-4, c2=0.9, ln_maxiter = ln_maxiter, tol=1e-14)
 model = get_fitted_model(X_train, Y_train, optimizer, seed, 2)
 h_lbfgs = model.history 
 results.append(h_lbfgs["loss_mse"][-1]) 

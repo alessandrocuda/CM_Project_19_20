@@ -31,28 +31,29 @@ print("Load Monk DataSet")
 X_train, Y_train = load_monk("3", "train")
 
 seed = 623
+ls_maxiter = 100
 
 #############################
 #          NCG f1
 #############################
 restart = 6
-optimizer = NCG(beta_method="fr", c1=1e-4, c2=.1, restart=restart, tol = 1e-12)
+optimizer = NCG(beta_method="fr", c1=1e-4, c2=.1, restart=restart, ln_maxiter = ls_maxiter, tol = 1e-12)
 model = get_fitted_model(X_train, Y_train, optimizer, seed, 1)
 h_fr = model.history 
 
 #############################
-#          NCG pr
+#          NCG pr+
 #############################
 
-optimizer = NCG(beta_method="pr", c1=1e-4, c2=.1, tol = 1e-12)
+optimizer = NCG(beta_method="pr+", c1=1e-4, c2=.1, ln_maxiter = ls_maxiter, tol = 1e-12)
 model = get_fitted_model(X_train, Y_train, optimizer, seed, 1)
 h_pr = model.history 
 
 #############################
-#          NCG Hs
+#          NCG Hs+
 #############################
 
-optimizer = NCG(beta_method="hs", c1=1e-4, c2=.4, tol = 1e-12)
+optimizer = NCG(beta_method="hs+", c1=1e-4, c2=.4, ln_maxiter = ls_maxiter, tol = 1e-12)
 model = get_fitted_model(X_train, Y_train, optimizer, seed, 1)
 h_hs = model.history 
 
@@ -60,7 +61,7 @@ h_hs = model.history
 #          L-BFGS
 #############################
 m = 3
-optimizer = LBFGS(m=m, c1= 1e-4, c2=0.4, tol=1e-20)
+optimizer = LBFGS(m=m, c1= 1e-4, c2=0.4, ln_maxiter = ls_maxiter, tol=1e-20)
 model = get_fitted_model(X_train, Y_train, optimizer, seed, 1)
 h_lbfgs = model.history 
 
@@ -83,5 +84,5 @@ plt.ylabel("MSE")
 plt.xlabel('Epoch')
 plt.grid()
 plt.yscale('log')
-plt.legend(['NCG - FR - R={}'.format(restart),'NCG - PR+','NCG - HS', 'L-BFGS - m={}'.format(m)], loc='upper right', fontsize='large')    
+plt.legend(['NCG - FR - R={}'.format(restart),'NCG - PR+','NCG - HS+', 'L-BFGS - m={}'.format(m)], loc='upper right', fontsize='large')    
 plt.show()
