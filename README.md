@@ -1,4 +1,4 @@
-# Computational Mathematics for Learning and Data Analysis 2019-2020
+# Computational Mathematics for Learning and Data Analysis Project 2019-2020
 
 ## Abastract
 TBW
