@@ -1,7 +1,13 @@
-# Computational Mathematics for Learning and Data Analysis Project 2019-2020
+# Computational Mathematics for Learning and Data Analysis  - Project 2019-2020
+
+*TRAINING  A NEURAL NETWORK WITH NONLINEAR CONJUGATE GRADIENT AND LIMITED-MEMORY BFGS METHODS*
 
 ## Abastract
-TBW
+Neural Networks are highly expressive models that have achieved the state of the art performance in many tasks as pattern recognition, natural language processing, and many others. Usually, stochastic momentum methods coupled with the classical Backpropagation algorithm for the gradient computation is used in training a neural network.
+In recent years several methods have been developed to accelerate the learning convergence of first-order methods such as Classic Momentum, also known as Polyak's heavy ball method, or the Nesterov momentum.
+This work aims to go beyond the first-order methods and analyse some variants of the nonlinear conjugate gradient (NCG) and a specific case of limited-memory quasi-Newton class called L-BFGS as optimization methods. Them are combined with  the use of a line search that respects the strong Wolfe conditions to accelerate the learning processes of a feedforward neural network.  
+
+To achieve this, our library, called ISANet lib, has been extended to include these two new optimizers.
 
 ## Introduction
 TBW
