@@ -32,11 +32,11 @@ def print_history(f, opt,c1, c2, r, m, history, opt_history, t):
     print("------------------------------------------------------------------------------------------------------------")
     print("     f   | Optimizer |    c1    |   c2   | restart |   m   |    Loss   |    ‖gk‖    | Conv. Iter. | Time (s) ")
     print("   {}     {}       {}      {}        {}        {}     {:.2e}      {:.2e}       {}         {:.2f}".format(
-            f, opt, c1, c2, r, m, history["loss_mse"][-1], opt_history["norm_g"][-1], len(history["loss_mse"]), t))
+            f, opt, c1, c2, r, m, history["loss_mse_reg"][-1], opt_history["norm_g"][-1], len(history["loss_mse_reg"]), t))
     print("------------------------------------------------------------------------------------------------------------")
     print("latex table row:")
     print("${}$ & {} & {} & {}  & {}  & {}  & {:.2e}  & {:.2e} & {}  & {:.2f}".format(
-            f, opt, c1, c2, r, m, history["loss_mse"][-1], opt_history["norm_g"][-1], len(history["loss_mse"]), t))
+            f, opt, c1, c2, r, m, history["loss_mse_reg"][-1], opt_history["norm_g"][-1], len(history["loss_mse_reg"]), t))
 
 def ls_stat(ls_max_iter, info):
     converged = 0
@@ -57,7 +57,7 @@ def ls_stat(ls_max_iter, info):
 print("Load Monk DataSet")
 X_train, Y_train = load_monk("1", "train")
 
-seed = 206
+seed = 6
 seed_buoni = [6, 206]
 results = []
 ln_maxiter = 100
@@ -117,10 +117,10 @@ import matplotlib.pyplot as plt
 pos_train = (0,0)
 figsize = (12, 4)
 
-plt.plot(h_fr["loss_mse"], linestyle='-')
-plt.plot(h_pr["loss_mse"], linestyle = '--')
-plt.plot(h_hs["loss_mse"], linestyle='-.')
-plt.plot(h_lbfgs["loss_mse"], linestyle=':')
+plt.plot(h_fr["loss_mse_reg"], linestyle='-')
+plt.plot(h_pr["loss_mse_reg"], linestyle = '--')
+plt.plot(h_hs["loss_mse_reg"], linestyle='-.')
+plt.plot(h_lbfgs["loss_mse_reg"], linestyle=':')
 plt.title('Monk1 - seed={}'.format(seed))
 plt.ylabel("Loss")
 plt.xlabel('Iteration')
