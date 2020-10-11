@@ -10,11 +10,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 #############################
-monk     =  "1"
+monk     =  "3"
 reg      =  1e-4
-seed     =  6 
-ng_eps   =  3e-5
+seed     =  783 
+ng_eps   =  10e-6
 l_eps    =  1e-6
 max_iter =  1000
 verbose  =  0
@@ -28,8 +29,8 @@ print()
 #############################
 beta_method = "fr" 
 c1          = 1e-4 
-c2          = .3 
-restart     = 3 
+c2          = .1 
+restart     = 6 
 ln_maxiter  = 100
 #############################
 optimizer = NCG(beta_method=beta_method, c1=c1, c2=c2, restart=restart, 
@@ -41,11 +42,10 @@ model_history, opt_history, time = optimize_monk_f(monk=monk,
                                                    max_iter = max_iter, 
                                                    verbose = verbose)
 print(" - NCG FR -")
-print_result(f="Monk"+monk, opt=("NCG "+beta_method).upper(), c1=c1, c2=c2, r=restart, m="-", history=model_history, opt_history=opt_history, time=time, latex=True)
-print_ls_result(ls_max_iter=ln_maxiter, opt_history=opt_history, latex=True)
+print_result(f="Monk"+monk, opt=("NCG "+beta_method).upper(), c1=c1, c2=c2, r=restart, m="-", history=model_history, opt_history=opt_history, time=time)
+print_ls_result(ls_max_iter=ln_maxiter, opt_history=opt_history)
 f_fr = model_history["loss_mse_reg"]
 p_fr = rate(model_history["loss_mse_reg"]) 
-save_csv(path="./experiments/methods_comparisons/results/monk{}/m{}-{}_fr.csv".format(monk, monk, seed), f="loss_mse_reg", model_history=model_history, opt_history=opt_history)
 
 
 #############################
@@ -53,7 +53,7 @@ save_csv(path="./experiments/methods_comparisons/results/monk{}/m{}-{}_fr.csv".f
 #############################
 beta_method = "pr+" 
 c1          = 1e-4 
-c2          = .4
+c2          = .1
 restart     = None
 ln_maxiter  = 100
 #############################
@@ -66,11 +66,10 @@ model_history, opt_history, time = optimize_monk_f(monk=monk,
                                                    max_iter = max_iter, 
                                                    verbose = verbose)
 print(" - NCG PR+ -")
-print_result(f="Monk"+monk, opt=("NCG "+beta_method).upper(), c1=c1, c2=c2, r=restart, m="-", history=model_history, opt_history=opt_history, time=time, latex=True)
-print_ls_result(ls_max_iter=ln_maxiter, opt_history=opt_history, latex=True)
+print_result(f="Monk"+monk, opt=("NCG "+beta_method).upper(), c1=c1, c2=c2, r=restart, m="-", history=model_history, opt_history=opt_history, time=time)
+print_ls_result(ls_max_iter=ln_maxiter, opt_history=opt_history)
 f_prp = model_history["loss_mse_reg"]
 p_prp = rate(model_history["loss_mse_reg"]) 
-save_csv(path="./experiments/methods_comparisons/results/monk{}/m{}-{}_prp.csv".format(monk, monk, seed), f="loss_mse_reg", model_history=model_history, opt_history=opt_history)
 
 
 #############################
@@ -78,7 +77,7 @@ save_csv(path="./experiments/methods_comparisons/results/monk{}/m{}-{}_prp.csv".
 #############################
 beta_method = "hs+" 
 c1          = 1e-4 
-c2          = .6
+c2          = .3
 restart     = None
 ln_maxiter  = 100
 #############################
@@ -91,11 +90,10 @@ model_history, opt_history, time = optimize_monk_f(monk=monk,
                                                    max_iter = max_iter, 
                                                    verbose = verbose)
 print(" - NCG HS+ -")
-print_result(f="Monk"+monk, opt=("NCG "+beta_method).upper(), c1=c1, c2=c2, r=restart, m="-", history=model_history, opt_history=opt_history, time=time, latex=True)
-print_ls_result(ls_max_iter=ln_maxiter, opt_history=opt_history, latex=True)
+print_result(f="Monk"+monk, opt=("NCG "+beta_method).upper(), c1=c1, c2=c2, r=restart, m="-", history=model_history, opt_history=opt_history, time=time)
+print_ls_result(ls_max_iter=ln_maxiter, opt_history=opt_history)
 f_hsp = model_history["loss_mse_reg"]
 p_hsp = rate(model_history["loss_mse_reg"]) 
-save_csv(path="./experiments/methods_comparisons/results/monk{}/m{}-{}_hsp.csv".format(monk, monk, seed), f="loss_mse_reg", model_history=model_history, opt_history=opt_history)
 
 
 #############################
@@ -114,11 +112,10 @@ model_history, opt_history, time = optimize_monk_f(monk=monk,
                                                    max_iter = max_iter, 
                                                    verbose = verbose)
 print(" - LBFGS - results")
-print_result(f="Monk"+monk, opt="L-BFGS", c1=c1, c2=c2, r="-", m=m, history=model_history, opt_history=opt_history, time=time, latex=True)
-print_ls_result(ls_max_iter=ln_maxiter, opt_history=opt_history, latex=True)
+print_result(f="Monk"+monk, opt="L-BFGS", c1=c1, c2=c2, r="-", m=m, history=model_history, opt_history=opt_history, time=time)
+print_ls_result(ls_max_iter=ln_maxiter, opt_history=opt_history)
 f_lbfgs = model_history["loss_mse_reg"]
 p_lbfgs = rate(model_history["loss_mse_reg"]) 
-save_csv(path="./experiments/methods_comparisons/results/monk{}/m{}-{}_lbfgs.csv".format(monk, monk, seed), f="loss_mse_reg", model_history=model_history, opt_history=opt_history)
 
 ##############################
 # plot
@@ -136,7 +133,6 @@ plt.xlabel('Iteration')
 plt.grid()
 plt.yscale('log')
 plt.legend(['NCG - FR - R={}'.format(restart),'NCG - PR+','NCG - HS+', 'L-BFGS - m={}'.format(m)], loc='upper right', fontsize='large')    
-plt.savefig('./experiments/methods_comparisons/results/monk{}/m{}-{}_comp.eps'.format(monk, monk, seed), format='eps')
 plt.show()
 
 plt.plot(p_fr, linestyle='-')
@@ -148,6 +144,5 @@ plt.ylabel("p")
 plt.xlabel('Iteration')
 plt.grid()
 plt.legend(['NCG - FR - R={}'.format(restart),'NCG - PR+','NCG - HS+', 'L-BFGS - m={}'.format(m)], loc='upper right', fontsize='large')    
-plt.savefig('./experiments/methods_comparisons/results/monk{}/m{}-{}_comp_p.eps'.format(monk, monk, seed), format='eps')
 plt.show()
 

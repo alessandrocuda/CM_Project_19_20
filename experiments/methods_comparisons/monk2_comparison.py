@@ -10,8 +10,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.pyplot as plt
 
-print(" - Start Monk1 comparison -")
-print()
+
 #############################
 monk     =  "2"
 reg      =  1e-4
@@ -20,6 +19,10 @@ ng_eps   =  3e-5
 l_eps    =  1e-6
 max_iter =  1000
 verbose  =  0
+##############################
+
+print(" - Start Monk{} comparison -".format(monk))
+print()
 
 #############################
 #          NCG FR

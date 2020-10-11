@@ -33,6 +33,43 @@ git submodule update
 
 And you are good to go!
 
+## Example
+NCG or LBFGS optimizer examples:
+
+```python
+from isanet.model import Mlp
+from isanet.optimizer import NCG, LBFGS
+from isanet.optimizer.utils import l_norm
+from isanet.datasets.monk import load_monk
+from isanet.utils.model_utils import printMSE, printAcc, plotHistory
+import isanet.metrics as metrics
+import numpy as np
+
+X_train, Y_train = load_monk("1", "train")
+
+#create the model
+model = Mlp()
+# Specify the range for the weights and lambda for regularization
+kernel_initializer = 0.003 
+kernel_regularizer = 0.001
+
+# Add many layers with different number of units
+model.add(4, input= 17, kernel_initializer, kernel_regularizer)
+model.add(1, kernel_initializer, kernel_regularizer)
+
+# Define your optimizer, debug parameter helps you to execture step by step by pressing a key on the keyboard.
+optimizer = NCG(beta_method="hs+", c1=1e-4, c2=0.1, restart=None, ln_maxiter = 100, norm_g_eps = 1e-9, l_eps = 1e-9, debug = True)
+# or you can choose the LBFGS optimizer
+#optimizer = LBFGS(m = 30, c1=1e-4, c2=0.9, ln_maxiter = 100, norm_g_eps = 1e-9, l_eps = 1e-9, debug = True)
+
+#start the optimisation phase
+# no batch with NCG or LBFGS optimizer
+model.fit(X_train,
+          Y_train, 
+          epochs=600,  
+          es = es,
+          verbose=0) 
+```
 
 ## References
 TBW
