@@ -1,4 +1,4 @@
 [submodule "ISANet"]
 	path = ISANet
 	url = https://github.com/alessandrocuda/ISANet.git
-	branch = NCG_LBFGS
+	branch = master
