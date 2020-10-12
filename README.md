@@ -27,9 +27,9 @@ Here we decided to derive three objective functions from the three <a href=https
     where E_i is the MSE and 10^-4||w||^2 is the regularization term.
 
 The experiments have been divided into two parts. 
- - First, <a href=https://github.com/alessandrocuda/CM_Project_19_20/tree/master/experiments/methods_behaviors>methods behaviors and validation experiments</a> where we have studied the methods' behaviors in order to check the correctness of our implementation and verify that the results described in the theoretical part, in terms of global convergence and local convergence, can be observed from a practical point of view.
- - Instead, in <a href=https://github.com/alessandrocuda/CM_Project_19_20/tree/master/experiments/methods_comparisons>,methods comparisons</a> we have compared the efficiency of all the methods from the same starting point.
-  
+ - First, <a href=https://github.com/alessandrocuda/CM_Project_19_20/tree/master/experiments/methods_behaviors>methods behaviors and validation</a> where we have studied the methods' behaviors in order to check the correctness of our implementation and verify that the results described in the theoretical part, in terms of global convergence and local convergence, can be observed from a practical point of view.
+ - Instead, in <a href=https://github.com/alessandrocuda/CM_Project_19_20/tree/master/experiments/methods_comparisons>methods comparisons</a> we have compared the efficiency of all the methods from the same starting point.
+
 All our experiments were performed on a Intel CPU with 2 cores and 4 thread at 2.6GHz and with OpenBLAS as optimized math routine for Numpy.
 ## Usage
 This code requires Python 3.5 or later, to download the repository:
