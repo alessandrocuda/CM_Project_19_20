@@ -65,19 +65,20 @@ import isanet.metrics as metrics
 import numpy as np
 
 X_train, Y_train = load_monk("1", "train")
-
+np.random.seed(seed=6)
 #create the model
 model = Mlp()
 # Specify the range for the weights and lambda for regularization
 kernel_initializer = 0.003 
-kernel_regularizer = 0.001
+kernel_regularizer = 1e-4
 
 # Add many layers with different number of units
-model.add(4, input= 17, kernel_initializer, kernel_regularizer)
-model.add(1, kernel_initializer, kernel_regularizer)
+model.add(4, input= 17, kernel_initializer=kernel_initializer, kernel_regularizer=kernel_regularizer)
+model.add(1, kernel_initializer=kernel_initializer, kernel_regularizer=kernel_regularizer)
 
 # Define your optimizer, debug parameter helps you to execture step by step by pressing a key on the keyboard.
-optimizer = NCG(beta_method="hs+", c1=1e-4, c2=0.1, restart=None, ln_maxiter = 100, norm_g_eps = 1e-9, l_eps = 1e-9, debug = True)
+optimizer = NCG(beta_method="hs+", c1=1e-4, c2=0.6, restart=None, ln_maxiter = 100, norm_g_eps = 3e-5, l_eps = 1e-6, debug = True)
+model.set_optimizer(optimizer)
 # or you can choose the LBFGS optimizer
 #optimizer = LBFGS(m = 30, c1=1e-4, c2=0.9, ln_maxiter = 100, norm_g_eps = 1e-9, l_eps = 1e-9, debug = True)
 
@@ -86,8 +87,7 @@ optimizer = NCG(beta_method="hs+", c1=1e-4, c2=0.1, restart=None, ln_maxiter = 1
 model.fit(X_train,
           Y_train, 
           epochs=600,  
-          es = es,
-          verbose=0) 
+          verbose=2) 
 ```
 what's next? [here](https://github.com/alessandrocuda/CM_Project_19_20/blob/master/examples/README.md) you can find some example scripts.
 
